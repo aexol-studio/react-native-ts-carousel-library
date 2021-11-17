@@ -32,7 +32,7 @@ const App = () => {
   return (
     <SafeAreaView>
       <StatusBar hidden />
-      <FlatListContainer data={images} uriPath={true} height={height} />
+      <FlatListContainer data={imagesFromPath} height={height} />
     </SafeAreaView>
   );
 };

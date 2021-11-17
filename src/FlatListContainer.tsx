@@ -1,5 +1,5 @@
 import Pagination from './components/Pagination';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { View, Dimensions, Animated, ImageRequireSource, StyleSheet } from 'react-native';
 
 
@@ -17,36 +17,53 @@ interface props {
 
 const FlatListContainer: React.FC<props> = ({ data, uriPath }) => {
     const scrollRef = useRef(new Animated.Value(0)).current;
-    const [snapped, setSnapped] = useState(0);
+    const [active, setActive] = useState<number>();
+    const [viewableItems, setViewableItems] = useState([]);
 
-    const viewabilityConfig = useRef({
-        itemVisiblePercentThreshold: 10,
-    });
+    const viewabilityConfig = {
+        itemVisiblePercentThreshold: 50,
+    };
 
-    const onViewableItemsChanged = useRef(({ viewableItems }) => {
-        if (viewableItems.length > 0) {
-            console.log('a', viewableItems);
-            setSnapped(viewableItems[0].index);
-        }
-    });
 
     const myRef = useRef(null);
     const currentIndex = useRef(0);
+    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
+        if (viewableItems.length > 0) {
+            const { index } = viewableItems[0];
+            console.log('Active index', index);
+            setActive(index);
+            setViewableItems(viewableItems);
+        }
+    }, []);
+
+    const viewabilityConfigCallbackPairs = useRef([{ viewabilityConfig, onViewableItemsChanged }]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            console.log('current.index', currentIndex.current);
-            console.log('snapped', snapped);
-            console.log(currentIndex.current === data.length);
-            currentIndex.current = currentIndex.current === data.length - 1 ? 0 : currentIndex.current + 1;
-            myRef.current.scrollToIndex({
-                animated: currentIndex.current === 0 ? false : true,
-                index: currentIndex.current,
-            });
+        console.log('active', active, currentIndex.current);
+        if (active === currentIndex.current) {
+            const timer = setInterval(() => {
+                currentIndex.current = currentIndex.current === data.length - 1 ? 0 : currentIndex.current + 1;
+                myRef.current.scrollToIndex({
+                    animated: currentIndex.current === 0 ? false : true,
+                    index: currentIndex.current,
+                });
 
-        }, 7000);
-        return () => clearInterval(timer);
-    }, []);
+            }, 4000);
+            return () => clearInterval(timer);
+        } else if (active || active === 0) {
+            console.log('jestesmy w else');
+            const timer = setInterval(() => {
+                console.log(active);
+                currentIndex.current = active === data.length - 1 ? 0 : active + 1;
+                myRef.current.scrollToIndex({
+                    animated: currentIndex.current === 0 ? false : true,
+                    index: currentIndex.current,
+                });
+
+            }, 4000);
+            return () => clearInterval(timer);
+        }
+    }, [active, currentIndex.current]);
 
     return (
         <View style={styles.wrapper}>
@@ -55,21 +72,20 @@ const FlatListContainer: React.FC<props> = ({ data, uriPath }) => {
                 ref={myRef}
                 keyExtractor={(_, index) => index.toString()}
                 horizontal
-                onViewableItemsChanged={onViewableItemsChanged.current}
-                viewabilityConfig={viewabilityConfig.current}
+                // onViewableItemsChanged={onViewChanged}
+                viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+                // viewabilityConfig={viewabilityConfig}
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled
-                decelerationRate="fast"
+                // decelerationRate="fast"
                 initialNumToRender={3}
                 snapToInterval={width}
-                // onViewableItemsChanged={() = { onViewChanged() }}
                 onScroll={
                     Animated.event(
                         [{ nativeEvent: { contentOffset: { x: scrollRef } } }],
                         { useNativeDriver: true }
                     )
                 }
-                on
                 renderItem={({ item, index }) => {
                     const inputRange = [
                         (index - 1) * width,
