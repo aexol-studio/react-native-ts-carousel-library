@@ -60,7 +60,7 @@ const images = [
   {url: 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=800&q=80'},
 ];
 
-      <FlatListContainer
+      <Carousel
         data={images}
         autoScroll={true}
         pagination={true}
@@ -78,7 +78,7 @@ const landscapeImages = [
   {url: require('./src/images/horizontal3.jpg'), title: 'tenements'},
 ];
 
-      <FlatListContainer
+      <Carousel
         data={landscapeImages}
         autoScroll={true}
         pagination={true}
@@ -100,4 +100,6 @@ const landscapeImages = [
 - carouselHeight - number,
 - backgroundStyles - styles for the carousel background,
 - imageWrapperStyles - styles for the image wrapper,
-- 
+- titleWrapperStyles - styles for the title wrapper,
+- titleStyles - title styles,
+- paginationStyles - styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left.
