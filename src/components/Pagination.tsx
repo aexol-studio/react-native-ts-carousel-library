@@ -2,26 +2,27 @@ import React from 'react';
 import { Animated, Dimensions, ImageRequireSource, StyleSheet, View } from 'react-native';
 
 const { width } = Dimensions.get('screen');
-const DOT_SIZE = 15;
 
 interface props {
     scrollRef: Animated.Value,
-    data: string[] | ImageRequireSource[];
+    data: { url: string | ImageRequireSource, title?: string }[];
+    paginationStyles?: { dotSize?: number, indicatorColor?: string, dotColor?: string, top?: number, bottom?: number, left?: number, right?: number }
 }
 
-const Pagination: React.FC<props> = ({ scrollRef, data }) => {
+const Pagination: React.FC<props> = ({ scrollRef, data, paginationStyles: { dotSize, indicatorColor, dotColor, top, bottom, left, right } = {} }) => {
+    const DOT_SIZE = dotSize ? dotSize : 15;
     const translateX = scrollRef.interpolate({
         inputRange: [-width, 0, width],
         outputRange: [-DOT_SIZE, 0, DOT_SIZE],
     });
 
     return (
-        <View style={styles.absoluteWrapper}>
+        <View style={[styles.absoluteWrapper, { bottom: bottom ? bottom : 50, top: top ? top : undefined, left: left ? left : undefined, right: right ? right : undefined }]}>
             <View style={styles.paginationContainer}>
-                <Animated.View style={[styles.paginationIndicator, { transform: [{ translateX }] }]} />
-                {data.map((image, i) => (
-                    <View style={styles.biggerCircle} key={i}>
-                        <View key={i} style={styles.whiteCircle} />
+                <Animated.View style={[styles.paginationIndicator, { transform: [{ translateX }], width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2, borderColor: indicatorColor ? indicatorColor : '#ddd' }]} />
+                {data.map((_, i) => (
+                    <View style={[styles.biggerCircle, { width: DOT_SIZE }]} key={i}>
+                        <View key={i} style={{ width: DOT_SIZE * 0.4, height: DOT_SIZE * 0.4, borderRadius: DOT_SIZE * 0.2, backgroundColor: dotColor ? dotColor : '#62a189' }} />
                     </View>
                 ))}
             </View>
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
     absoluteWrapper: {
         position: 'absolute',
         alignSelf: 'center',
-        bottom: 50,
     },
     paginationContainer: {
         display: 'flex',
@@ -47,23 +47,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     paginationIndicator: {
-        width: DOT_SIZE,
-        height: DOT_SIZE,
-        borderRadius: DOT_SIZE / 2,
         borderWidth: 1,
-        borderColor: '#ddd',
         position: 'absolute',
         left: 0,
     },
     biggerCircle: {
-        width: DOT_SIZE,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    whiteCircle: {
-        width: DOT_SIZE * 0.4,
-        height: DOT_SIZE * 0.4,
-        borderRadius: DOT_SIZE * 0.2,
-        backgroundColor: '#62a189',
     },
 });
