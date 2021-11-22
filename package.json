@@ -1,7 +1,20 @@
 {
   "name": "react-native-ts-carousel-library",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "license": "MIT",
+  "keywords": [
+    "react-native",
+    "carousel",
+    "ios",
+    "android",
+    "mobile",
+    "horizontal carousel",
+    "animated horizontal carousel"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aexol-studio/react-native-ts-carousel-library.git"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",

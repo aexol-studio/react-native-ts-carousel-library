@@ -1,5 +1,5 @@
 import Pagination from './components/Pagination';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Dimensions,
@@ -13,15 +13,14 @@ import {
 } from 'react-native';
 import isURL from 'validator/lib/isURL';
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 interface props {
-  data: {url: string | ImageRequireSource; title?: string}[];
+  data: { url: string | ImageRequireSource; title?: string }[];
   autoScroll: boolean;
   autoScrollInterval?: number;
   title?: boolean;
-  carouselHeight?: number;
   landscapeImage?: boolean;
   backgroundStyles?: ViewStyle;
   imageWrapperStyles?: ViewStyle;
@@ -43,7 +42,6 @@ const Carousel: React.FC<props> = ({
   data,
   landscapeImage,
   pagination = true,
-  carouselHeight,
   autoScroll,
   backgroundStyles,
   title,
@@ -60,15 +58,15 @@ const Carousel: React.FC<props> = ({
   };
   const myRef = useRef<FlatList>(null);
 
-  const onViewableItemsChanged = useCallback(({viewableItems}) => {
+  const onViewableItemsChanged = useCallback(({ viewableItems }) => {
     if (viewableItems.length > 0) {
-      const {index} = viewableItems[0];
+      const { index } = viewableItems[0];
       setActive(index);
     }
   }, []);
 
   const viewabilityConfigCallbackPairs = useRef([
-    {viewabilityConfig, onViewableItemsChanged},
+    { viewabilityConfig, onViewableItemsChanged },
   ]);
 
   useEffect(() => {
@@ -86,22 +84,9 @@ const Carousel: React.FC<props> = ({
 
   return (
     <View
-      // style={[
-      //   styles.wrapper,
-      //   { !landscapeImage ? () : (height: carouselHeight ? carouselHeight : '100%') },
-      //   backgroundStyles,
-      // ]}
       style={[
-        landscapeImage
-          ? (styles.wrapper,
-            backgroundStyles,
-            {
-              height: carouselHeight ? carouselHeight : ITEM_WIDTH,
-              width: carouselHeight ? carouselHeight * 0.76 : width,
-            })
-          : styles.wrapper,
+        styles.wrapper,
         backgroundStyles,
-        {height: carouselHeight ? carouselHeight : '100%', width: '100%'},
       ]}>
       <Animated.FlatList
         data={data}
@@ -111,14 +96,14 @@ const Carousel: React.FC<props> = ({
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
-        decelerationRate="normal"
+        decelerationRate="fast"
         initialNumToRender={2}
         snapToInterval={width}
         onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {x: scrollRef}}}],
-          {useNativeDriver: true},
+          [{ nativeEvent: { contentOffset: { x: scrollRef } } }],
+          { useNativeDriver: true },
         )}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           const inputRange = [
             (index - 1) * width,
             index * width,
@@ -129,50 +114,18 @@ const Carousel: React.FC<props> = ({
             outputRange: [-width * 0.7, 0, width * 0.7],
           });
           const isUrl = isURL(item.url + '');
-          const imageSource = isUrl ? {uri: item.url} : item.url;
+          const imageSource = isUrl ? { uri: item.url } : item.url;
           return (
             <View style={[styles.singleItem, imageWrapperStyles]}>
-              {title && (
-                <View style={[styles.titleContainer, titleWrapperStyles]}>
-                  <Text key={index} style={[styles.title, titleStyles]}>
-                    {item.title}
-                  </Text>
-                </View>
-              )}
-              <View
-                style={[
-                  landscapeImage
-                    ? (styles.horizontalImageContainer,
-                      {
-                        height: carouselHeight ? carouselHeight : ITEM_WIDTH,
-                        width: carouselHeight ? width * 0.95 : ITEM_HEIGHT - 50,
-                      })
-                    : styles.imageContainer,
-                  {
-                    height: carouselHeight ? carouselHeight : ITEM_HEIGHT,
-                    width: carouselHeight ? carouselHeight * 0.76 : ITEM_WIDTH,
-                  },
-                ]}>
+              {title && <View style={[styles.titleContainer, titleWrapperStyles]}>
+                <Text key={index} style={[styles.title, titleStyles]}>
+                  {item.title}
+                </Text>
+              </View>}
+              <View style={[landscapeImage ? styles.horizontalImageContainer : styles.imageContainer]}>
                 <Animated.Image
                   source={imageSource}
-                  style={[
-                    landscapeImage
-                      ? (styles.horizontalImage,
-                        {
-                          height: carouselHeight ? carouselHeight : ITEM_WIDTH,
-                          width: carouselHeight
-                            ? width * 1.15
-                            : ITEM_HEIGHT - 50 * 1.15,
-                        })
-                      : (styles.image,
-                        {
-                          height: carouselHeight ? carouselHeight : ITEM_HEIGHT,
-                          width: carouselHeight
-                            ? carouselHeight * 0.76
-                            : ITEM_WIDTH,
-                        }),
-                    {transform: [{translateX}]},
-                  ]}
+                  style={[landscapeImage ? styles.horizontalImage : styles.image, { transform: [{ translateX }] }]}
                 />
               </View>
             </View>
@@ -195,32 +148,37 @@ export default Carousel;
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
+    minHeight: ITEM_WIDTH,
     position: 'relative',
   },
   singleItem: {
     width: width,
+    height: ITEM_HEIGHT,
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   imageContainer: {
     width: ITEM_WIDTH,
+    height: ITEM_HEIGHT,
     overflow: 'hidden',
     alignItems: 'center',
     borderRadius: 14,
   },
   horizontalImageContainer: {
+    width: ITEM_HEIGHT - 50,
+    height: ITEM_WIDTH,
     overflow: 'hidden',
     alignItems: 'center',
     borderRadius: 14,
   },
   image: {
-    // width: ITEM_WIDTH * 1.2,
-    // height: ITEM_HEIGHT,
+    width: ITEM_WIDTH * 1.2,
+    height: ITEM_HEIGHT,
     resizeMode: 'cover',
   },
   horizontalImage: {
-    // width: ITEM_HEIGHT * 1.2,
-    // height: ITEM_WIDTH,
+    width: ITEM_HEIGHT * 1.2,
+    height: ITEM_WIDTH,
     resizeMode: 'cover',
   },
   titleContainer: {

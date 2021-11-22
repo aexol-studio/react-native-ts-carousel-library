@@ -29,15 +29,12 @@ import Carousel from 'react-native-ts-carousel-library';
 import { Dimensions } from 'react-native';
 import {images} from './src/data';
 
-const { height } = Dimensions.get('screen');
-
 function App() {
   return (
       <Carousel
         data={images}
         autoScroll={true}
         pagination={true}
-        carouselHeight={height}
       />
   )
 }
@@ -51,7 +48,7 @@ const imagesFromPath = [
   {url: require('./src/images/image3.jpg')},
 ];
 ```
-If you would like to use the url path, set the uriPath props to true: 
+For the images with url path the data array should look like below: 
 
 ```javascript
 const images = [
@@ -63,8 +60,6 @@ const images = [
       <Carousel
         data={images}
         autoScroll={true}
-        pagination={true}
-        uriPath={true} // add this prop
       />
 ```
 Please make sure all your images have the similar size and orientation.
@@ -81,7 +76,6 @@ const landscapeImages = [
       <Carousel
         data={landscapeImages}
         autoScroll={true}
-        pagination={true}
         landscapeImage={true} // add this prop
       />
 ```
@@ -95,11 +89,12 @@ const landscapeImages = [
 
 #### optional:
 
+- autoScrollInterval - scroll interval,
 - pagination - determines if the pagination should be displayed,
 - title - set to true if you want to display the title,
-- carouselHeight - number,
 - backgroundStyles - styles for the carousel background,
 - imageWrapperStyles - styles for the image wrapper,
 - titleWrapperStyles - styles for the title wrapper,
 - titleStyles - title styles,
-- paginationStyles - styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left.
+- paginationStyles - styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left,
+- landscapeImage - set to true if you have horizontal oriented images.

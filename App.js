@@ -1,41 +1,39 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, View, Text} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
 import Carousel from './src/Carousel';
 
 const data = [
-  {url: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=800&q=80'},
-  {url: 'https://images.unsplash.com/photo-1562569633-622303bafef5?w=800&q=80'},
   {
-    url: 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=800&q=80',
+    url: 'https://media.istockphoto.com/photos/mount-hood-oregon-picture-id1268487061?b=1&k=20&m=1268487061&s=170667a&w=0&h=3fHYwaImlqUETcjCnSV7YO2-PzCFvaX6VSQaiGfWqpc=',
   },
-  {url: 'https://images.unsplash.com/photo-1555096462-c1c5eb4e4d64?w=800&q=80'},
   {
-    url: 'https://images.unsplash.com/photo-1517957754642-2870518e16f8?w=800&q=80',
+    url: 'https://photographycourse.net/wp-content/uploads/2014/11/Landscape-Photography-steps.jpg',
   },
-  {url: 'https://images.unsplash.com/photo-1546484959-f9a381d1330d?w=800&q=80'},
-  {url: 'https://images.unsplash.com/photo-1548761208-b7896a6ff225?w=800&q=80'},
   {
-    url: 'https://images.unsplash.com/photo-1511208687438-2c5a5abb810c?w=800&q=80',
+    url: 'https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg',
   },
-  {url: 'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=800&q=80'},
-  {url: 'https://images.unsplash.com/photo-1548600916-dc8492f8e845?w=800&q=80'},
+  {url: 'https://wallpaperaccess.com/full/321138.jpg'},
+  {url: 'https://miro.medium.com/max/3200/1*N3u1tt7fE8nFNWh6RtiRsQ.jpeg'},
+  {
+    url: 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  },
+  {
+    url: 'https://images.photowall.com/products/60869/azores-mountain-landscape-1.jpg?h=699&q=85',
+  },
 ];
 
 const App = () => {
   return (
     <SafeAreaView>
-      <StatusBar hidden />
       <Carousel
         data={data}
-        carouselHeight={300}
-        landscapeImage={true}
+        // landscapeImage={true}
         autoScroll={true}
-        title={true}
         pagination={true}
-        // imageStyles={{imageWidth: '100%'}}
+        backgroundStyles={{marginTop: 30, height: 420}}
       />
-      <View style={{paddingTop: 20, paddingHorizontal: 10}}>
-        <Text style={{textAlign: 'center', marginBottom: 10}}>
+      <View style={{padding: 7}}>
+        <Text style={{alignSelf: 'center', paddingBottom: 20}}>
           The rest of your app
         </Text>
         <Text style={{textAlign: 'justify', fontSize: 12, lineHeight: 18}}>

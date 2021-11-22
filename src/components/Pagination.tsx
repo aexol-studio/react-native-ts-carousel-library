@@ -17,7 +17,7 @@ const Pagination: React.FC<props> = ({ scrollRef, data, paginationStyles: { dotS
     });
 
     return (
-        <View style={[styles.absoluteWrapper, { bottom: bottom ? bottom : 50, top: top ? top : undefined, left: left ? left : undefined, right: right ? right : undefined }]}>
+        <View style={[styles.absoluteWrapper, { bottom: bottom ? bottom : 10, top: top ? top : undefined, left: left ? left : undefined, right: right ? right : undefined }]}>
             <View style={styles.paginationContainer}>
                 <Animated.View style={[styles.paginationIndicator, { transform: [{ translateX }], width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2, borderColor: indicatorColor ? indicatorColor : '#ddd' }]} />
                 {data.map((_, i) => (
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     absoluteWrapper: {
         position: 'absolute',
         alignSelf: 'center',
+        marginVertical: 20,
     },
     paginationContainer: {
         display: 'flex',
