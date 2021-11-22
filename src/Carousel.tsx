@@ -1,5 +1,5 @@
 import Pagination from './components/Pagination';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   View,
   Dimensions,
@@ -13,11 +13,11 @@ import {
 } from 'react-native';
 import isURL from 'validator/lib/isURL';
 
-const { width } = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 interface props {
-  data: { url: string | ImageRequireSource; title?: string }[];
+  data: {url: string | ImageRequireSource; title?: string}[];
   autoScroll: boolean;
   autoScrollInterval?: number;
   title?: boolean;
@@ -54,52 +54,35 @@ const Carousel: React.FC<props> = ({
   autoScrollInterval = 5000,
 }) => {
   const scrollRef = useRef(new Animated.Value(0)).current;
-  const [active, setActive] = useState<number>();
+  const [active, setActive] = useState<number>(0);
   const viewabilityConfig = {
     itemVisiblePercentThreshold: 50,
   };
   const myRef = useRef<FlatList>(null);
-  const currentIndex = useRef(0);
 
-
-  const onViewableItemsChanged = useCallback(({ viewableItems }) => {
+  const onViewableItemsChanged = useCallback(({viewableItems}) => {
     if (viewableItems.length > 0) {
-      const { index } = viewableItems[0];
+      const {index} = viewableItems[0];
       setActive(index);
     }
   }, []);
 
   const viewabilityConfigCallbackPairs = useRef([
-    { viewabilityConfig, onViewableItemsChanged },
+    {viewabilityConfig, onViewableItemsChanged},
   ]);
 
   useEffect(() => {
+    let timer: NodeJS.Timer;
     if (autoScroll) {
-      if (active === currentIndex.current) {
-        const timer = setInterval(() => {
-          currentIndex.current =
-            currentIndex.current === data.length - 1
-              ? 0
-              : currentIndex.current + 1;
-          myRef.current?.scrollToIndex({
-            animated: currentIndex.current === 0 ? false : true,
-            index: currentIndex.current,
-          });
-        }, autoScrollInterval);
-        return () => clearInterval(timer);
-      } else if (active || active === 0) {
-        const timer = setInterval(() => {
-          currentIndex.current = active === data.length - 1 ? 0 : active + 1;
-          myRef.current?.scrollToIndex({
-            animated: currentIndex.current === 0 ? false : true,
-            index: currentIndex.current,
-          });
-        }, autoScrollInterval);
-        return () => clearInterval(timer);
-      }
+      timer = setInterval(() => {
+        myRef.current?.scrollToIndex({
+          animated: active === data.length - 1 ? false : true,
+          index: active === data.length - 1 ? 0 : active + 1,
+        });
+      }, autoScrollInterval);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
+    return () => clearInterval(timer);
+  }, [active, autoScroll, data.length, autoScrollInterval]);
 
   return (
     <View
@@ -110,10 +93,16 @@ const Carousel: React.FC<props> = ({
       // ]}
       style={[
         landscapeImage
-          ? (styles.wrapper, backgroundStyles, { height: carouselHeight ? carouselHeight : ITEM_WIDTH, width: carouselHeight ? carouselHeight * 0.76 : width })
-          : styles.wrapper, backgroundStyles, { height: carouselHeight ? carouselHeight : '100%', width: '100%' },
-      ]}
-    >
+          ? (styles.wrapper,
+            backgroundStyles,
+            {
+              height: carouselHeight ? carouselHeight : ITEM_WIDTH,
+              width: carouselHeight ? carouselHeight * 0.76 : width,
+            })
+          : styles.wrapper,
+        backgroundStyles,
+        {height: carouselHeight ? carouselHeight : '100%', width: '100%'},
+      ]}>
       <Animated.FlatList
         data={data}
         ref={myRef}
@@ -126,10 +115,10 @@ const Carousel: React.FC<props> = ({
         initialNumToRender={2}
         snapToInterval={width}
         onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollRef } } }],
-          { useNativeDriver: true },
+          [{nativeEvent: {contentOffset: {x: scrollRef}}}],
+          {useNativeDriver: true},
         )}
-        renderItem={({ item, index }) => {
+        renderItem={({item, index}) => {
           const inputRange = [
             (index - 1) * width,
             index * width,
@@ -140,7 +129,7 @@ const Carousel: React.FC<props> = ({
             outputRange: [-width * 0.7, 0, width * 0.7],
           });
           const isUrl = isURL(item.url + '');
-          const imageSource = isUrl ? { uri: item.url } : item.url;
+          const imageSource = isUrl ? {uri: item.url} : item.url;
           return (
             <View style={[styles.singleItem, imageWrapperStyles]}>
               {title && (
@@ -153,14 +142,36 @@ const Carousel: React.FC<props> = ({
               <View
                 style={[
                   landscapeImage
-                    ? (styles.horizontalImageContainer, { height: carouselHeight ? carouselHeight : ITEM_WIDTH, width: carouselHeight ? width * 0.95 : ITEM_HEIGHT - 50 })
-                    : styles.imageContainer, { height: carouselHeight ? carouselHeight : ITEM_HEIGHT, width: carouselHeight ? carouselHeight * 0.76 : ITEM_WIDTH },
+                    ? (styles.horizontalImageContainer,
+                      {
+                        height: carouselHeight ? carouselHeight : ITEM_WIDTH,
+                        width: carouselHeight ? width * 0.95 : ITEM_HEIGHT - 50,
+                      })
+                    : styles.imageContainer,
+                  {
+                    height: carouselHeight ? carouselHeight : ITEM_HEIGHT,
+                    width: carouselHeight ? carouselHeight * 0.76 : ITEM_WIDTH,
+                  },
                 ]}>
                 <Animated.Image
                   source={imageSource}
                   style={[
-                    landscapeImage ? (styles.horizontalImage, { height: carouselHeight ? carouselHeight : ITEM_WIDTH, width: carouselHeight ? width * 1.15 : ITEM_HEIGHT - 50 * 1.15 }) : (styles.image, { height: carouselHeight ? carouselHeight : ITEM_HEIGHT, width: carouselHeight ? carouselHeight * 0.76 : ITEM_WIDTH }),
-                    { transform: [{ translateX }] },
+                    landscapeImage
+                      ? (styles.horizontalImage,
+                        {
+                          height: carouselHeight ? carouselHeight : ITEM_WIDTH,
+                          width: carouselHeight
+                            ? width * 1.15
+                            : ITEM_HEIGHT - 50 * 1.15,
+                        })
+                      : (styles.image,
+                        {
+                          height: carouselHeight ? carouselHeight : ITEM_HEIGHT,
+                          width: carouselHeight
+                            ? carouselHeight * 0.76
+                            : ITEM_WIDTH,
+                        }),
+                    {transform: [{translateX}]},
                   ]}
                 />
               </View>
