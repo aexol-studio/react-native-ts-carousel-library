@@ -92,10 +92,10 @@ const landscapeImages = [
 
 - data - an array of objects with url and title property, where only url is required
 - autoScroll - determines if the scroll animation should be turned on,
-- pagination - determines if the pagination should be displayed,
 
 #### optional:
 
+- pagination - determines if the pagination should be displayed,
 - title - set to true if you want to display the title,
 - carouselHeight - number,
 - backgroundStyles - styles for the carousel background,

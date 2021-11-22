@@ -2,27 +2,23 @@ import React from 'react';
 import {SafeAreaView, StatusBar, View, Text} from 'react-native';
 import Carousel from './src/Carousel';
 
-export const imagesFromPath = [
-  require('./src/images/image1.jpg'),
-  require('./src/images/image2.jpg'),
-  require('./src/images/image3.jpg'),
-  require('./src/images/image4.jpg'),
-  require('./src/images/image5.jpg'),
-  require('./src/images/image6.jpg'),
-  require('./src/images/image7.jpg'),
-  require('./src/images/image8.jpg'),
-  require('./src/images/image9.jpg'),
-  require('./src/images/image10.jpg'),
-];
-
-export const imagesHorizontal = [
-  {url: require('./src/images/horizontal1.jpg'), title: 'little church'},
-  {url: require('./src/images/horizontal2.jpg'), title: 'river'},
-  {url: require('./src/images/horizontal3.jpg'), title: 'tenements'},
-  {url: require('./src/images/horizontal4.jpg'), title: 'see'},
-  {url: require('./src/images/horizontal5.jpg'), title: 'mountains'},
-  {url: require('./src/images/horizontal6.jpg'), title: 'squirrel'},
-  {url: require('./src/images/horizontal7.jpg'), title: 'tiger'},
+const data = [
+  {url: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=800&q=80'},
+  {url: 'https://images.unsplash.com/photo-1562569633-622303bafef5?w=800&q=80'},
+  {
+    url: 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=800&q=80',
+  },
+  {url: 'https://images.unsplash.com/photo-1555096462-c1c5eb4e4d64?w=800&q=80'},
+  {
+    url: 'https://images.unsplash.com/photo-1517957754642-2870518e16f8?w=800&q=80',
+  },
+  {url: 'https://images.unsplash.com/photo-1546484959-f9a381d1330d?w=800&q=80'},
+  {url: 'https://images.unsplash.com/photo-1548761208-b7896a6ff225?w=800&q=80'},
+  {
+    url: 'https://images.unsplash.com/photo-1511208687438-2c5a5abb810c?w=800&q=80',
+  },
+  {url: 'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=800&q=80'},
+  {url: 'https://images.unsplash.com/photo-1548600916-dc8492f8e845?w=800&q=80'},
 ];
 
 const App = () => {
@@ -30,7 +26,7 @@ const App = () => {
     <SafeAreaView>
       <StatusBar hidden />
       <Carousel
-        data={imagesHorizontal}
+        data={data}
         carouselHeight={300}
         landscapeImage={true}
         autoScroll={true}

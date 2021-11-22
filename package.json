@@ -1,18 +1,23 @@
 {
-  "name": "reactnativecarousel",
-  "version": "0.0.1",
-  "private": true,
+  "name": "react-native-ts-carousel-library",
+  "version": "0.0.5",
+  "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "bob build"
   },
   "dependencies": {
+    "validator": "^13.7.0",
     "react": "17.0.2",
-    "react-native": "0.66.2",
-    "validator": "^13.7.0"
+    "react-native": "0.66.2"
+  },
+  "peerDependencies": {
+    "react": "17.x",
+    "react-native": "0.6x"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -28,10 +33,38 @@
     "eslint": "7.14.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.66.2",
+    "react-native-builder-bob": "^0.18.2",
     "react-test-renderer": "17.0.2",
-    "typescript": "^4.4.4"
+    "typescript": "^4.x.x"
   },
   "jest": {
-    "preset": "react-native"
-  }
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ]
+  },
+  "main": "lib/commonjs/index.ts",
+  "react-native": "src/index.ts",
+  "module": "lib/module/index.ts",
+  "types": "lib/typescript/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
