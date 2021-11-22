@@ -1,4 +1,4 @@
-# react-native-ts-carousel-library
+# react-native-carousel-library
 
 A simple and fully customizable carousel library for React Native with Type Script. 
 You can turn on the automatic image change, add a pagination or a title to the image.
@@ -9,7 +9,7 @@ You can turn on the automatic image change, add a pagination or a title to the i
 ## Installation
 
 ```bash
-  npm i react-native-ts-carousel-library
+  npm i react-native-carousel-library
   cd ios
   pod install
 ```
