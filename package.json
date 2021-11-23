@@ -1,6 +1,6 @@
 {
   "name": "react-native-carousel-library",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
   "keywords": [
     "react-native",
@@ -24,9 +24,7 @@
     "prepare": "bob build"
   },
   "dependencies": {
-    "validator": "^13.7.0",
-    "react": "17.0.2",
-    "react-native": "0.66.2"
+    "validator": "^13.7.0"
   },
   "peerDependencies": {
     "react": "17.x",

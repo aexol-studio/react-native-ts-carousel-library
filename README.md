@@ -1,5 +1,8 @@
 # react-native-carousel-library
 
+[![npm](https://img.shields.io/npm/v/react-native-data-storage-hooks.svg?style=flat-square)](https://www.npmjs.com/package/react-native-carousel-library)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A simple and fully customizable carousel library for React Native with Type Script. 
 You can turn on the automatic image change, add a pagination or a title to the image.
 
@@ -80,21 +83,22 @@ const landscapeImages = [
       />
 ```
 
-## Other props
+## Available props
 
-#### required:
+| Name                             | Type                 | Default                        | Description                                                                                                                                |
+| -------------------------------- | -------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data`                           | `object[]`           | **REQUIRED** , `[]`,                      | An array of objects with url and title property, where only url is required                                                                                                                      |
+| `autoScroll`                     | `boolean`               | **REQUIRED** ,`true`                           | Determines if the scroll animation should be turned on                                                                                                |
+| `autoScrollInterval`                   | `number` | `5000`                 | Modal hide animation (in ms)                                                                                                                     |
+| `backgroundStyles`             | `ViewStyle`               |                             | Carousel's background styles                                                                                               |
+| `imageWrapperStyles`                  | `ViewStyle`               |                         | Image wrapper styles                                                                                                |
+| `landscapeImage`                    | `boolean`               | `false`                           | Display the horizontal images                          |
+| `pagination`                    | `boolean`               | `true`                           | Display the pagination                                                                                                                       |
+| `paginationStyles`                  | `ViewStyle`             |                      | Styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left,                                                                                                              |
+| `title`                | `boolean`             | `false`                           | Render the image title                                                                                             |
+| `titleStyles`     | `ViewStyle`             |                             | Title text styles                                                                                                           |
+| `titleWrapperStyles`    | `ViewStyle`             |                             | Title wrapper styles                                                                                                           |
 
-- data - an array of objects with url and title property, where only url is required
-- autoScroll - determines if the scroll animation should be turned on,
+## License
 
-#### optional:
-
-- autoScrollInterval - scroll interval,
-- pagination - determines if the pagination should be displayed,
-- title - set to true if you want to display the title,
-- backgroundStyles - styles for the carousel background,
-- imageWrapperStyles - styles for the image wrapper,
-- titleWrapperStyles - styles for the title wrapper,
-- titleStyles - title styles,
-- paginationStyles - styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left,
-- landscapeImage - set to true if you have horizontal oriented images.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

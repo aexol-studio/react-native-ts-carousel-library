@@ -51,10 +51,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Estonia-Regular.ttf</string>
-		<string>Roboto-Thin.ttf</string>
-	</array>
 </dict>
 </plist>

@@ -192,7 +192,6 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: 21,
-    fontFamily: 'Estonia-Regular',
     paddingBottom: 10,
     letterSpacing: 2,
   },

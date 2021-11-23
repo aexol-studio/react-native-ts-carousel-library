@@ -9,3 +9,9 @@ node_modules
 tmp
 App.js
 index.js
+
+# example
+/App.js
+/index.js
+android/
+ios/
