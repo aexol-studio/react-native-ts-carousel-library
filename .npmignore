@@ -1,0 +1,17 @@
+# Logs
+*.log
+npm-debug.log
+
+# Dependency directory
+node_modules
+
+# Runtime data
+tmp
+App.js
+index.js
+
+# example
+/App.js
+/index.js
+android/
+ios/

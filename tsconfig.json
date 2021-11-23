@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "jsx": "react-native",
+      "lib": ["es2017"],
+      "moduleResolution": "node",
+      "strict": true,
+      "target": "esnext",
+      "baseUrl": "./src",
+      "declaration": true,
+      "skipLibCheck": true,
+      "outDir": "./lib"
+    },
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "node_modules",
+      "babel.config.js",
+      "metro.config.js",
+      "jest.config.js",
+      "typings/main",
+      "typings/main.d.ts",
+      "typings/index.d.ts"
+    ]
+  }
