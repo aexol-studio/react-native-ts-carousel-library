@@ -19,10 +19,11 @@ You can turn on the automatic image change, add a pagination or a title to the i
     
 ## Overview
 
-https://user-images.githubusercontent.com/93936978/142192166-d07aebd4-7086-4804-aac9-36517202f5a1.mp4
+https://user-images.githubusercontent.com/93936978/143039707-604963bf-0cf7-4de7-a992-99a0677dc25f.mp4
 
 
-https://user-images.githubusercontent.com/93936978/142192203-62728966-be56-49ef-b066-df4edca436e0.mp4
+https://user-images.githubusercontent.com/93936978/143039788-5cd6030a-38b9-4f17-a819-0ed6a471eee7.mp4
+
 
 
 ## Usage
