@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "react": "17.x",
-    "react-native": "0.6x"
+    "react-native": ">=0.60"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
