@@ -6,15 +6,10 @@
 A simple and fully customizable carousel library for React Native with Type Script. 
 You can turn on the automatic image change, add a pagination or a title to the image.
 
-
-
-
 ## Installation
 
 ```bash
   npm i react-native-carousel-library
-  cd ios
-  pod install
 ```
     
 ## Overview
@@ -86,20 +81,16 @@ const landscapeImages = [
 
 ## Available props
 
-| Name                             | Type                 | Default                        | Description                                                                                                                                |
-| -------------------------------- | -------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `data`                           | `object[]`           | **REQUIRED** , `[]`,                      | An array of objects with url and title property, where only url is required                                                                                                                      |
-| `autoScroll`                     | `boolean`               | **REQUIRED** ,`true`                           | Determines if the scroll animation should be turned on                                                                                                |
-| `autoScrollInterval`                   | `number` | `5000`                 | Modal hide animation (in ms)                                                                                                                     |
-| `backgroundStyles`             | `ViewStyle`               |                             | Carousel's background styles                                                                                               |
-| `imageWrapperStyles`                  | `ViewStyle`               |                         | Image wrapper styles                                                                                                |
-| `landscapeImage`                    | `boolean`               | `false`                           | Display the horizontal images                          |
-| `pagination`                    | `boolean`               | `true`                           | Display the pagination                                                                                                                       |
-| `paginationStyles`                  | `ViewStyle`             |                      | Styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left,                                                                                                              |
-| `title`                | `boolean`             | `false`                           | Render the image title                                                                                             |
-| `titleStyles`     | `ViewStyle`             |                             | Title text styles                                                                                                           |
-| `titleWrapperStyles`    | `ViewStyle`             |                             | Title wrapper styles                                                                                                           |
-
-## License
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+| Name                             | Type                 | Default                        |Required     | Description                                                                                                                                |
+| -------------------------------- | -------------------- | ------------------------------ | ------------|------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data`                           | `object[]`           | `[]`                           | yes         |An array of objects with url and title property, where only url is required                                                                                                                      |
+| `autoScroll`                     | `boolean`            | `true`                         | yes          |Determines if the scroll animation should be turned on                                                                                                |
+| `autoScrollInterval`             | `number`             | `5000`                         | no           |Scroll interval (in ms)                                                                                                                     |
+| `backgroundStyles`             | `ViewStyle`               |                             | no           | Carousel's background styles                                                                                               |
+| `imageWrapperStyles`                  | `ViewStyle`               |                         | no           | Image wrapper styles                                                                                                |
+| `landscapeImage`                    | `boolean`               | `false`                           | no           | Display the horizontal images                          |
+| `pagination`                    | `boolean`               | `true`                           | no           | Display the pagination                                                                                                                       |
+| `paginationStyles`                  | `ViewStyle`             |                      | no           | Styles available: dotSize, dotColor, indicatorColor, top, bottom, right, left,                                                                                                              |
+| `title`                | `boolean`             | `false`                           | no           | Render the image title                                                                                             |
+| `titleStyles`     | `ViewStyle`             |                             | no           | Title text styles                                                                                                           |
+| `titleWrapperStyles`    | `ViewStyle`             |                             | no           | Title wrapper styles                                                                                                           |
